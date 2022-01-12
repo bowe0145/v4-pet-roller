@@ -19,7 +19,6 @@ export function PetEgg({ onOpen, tier, amount = 1 }) {
         let pet = PetList.find(pet => pet.sum > randomNumber)
         petList.push(pet)
       }
-      console.log(petList)
       onOpen(petList)
     } else {
       const randomNumber = (Math.random() * (100 + 1.0 - 1.0)).toFixed(4)

@@ -129,7 +129,6 @@ function Pets() {
 
   const openPetEgg = pet => {
     const isMultiplePets = Array.isArray(pet)
-    console.log(`ismultiplepets: ${isMultiplePets}`)
     if (isMultiplePets) {
       setCount(count + pet.length)
       let newPetInventory = [...petInventory]
@@ -137,7 +136,6 @@ function Pets() {
       pet.forEach(p => {
         // Find the pet in the inventory
         const petInInventory = newPetInventory.find(i => i.name === p.name)
-        console.log(`petInInventory:`, petInInventory)
         // If it's not in the inventory, add it
         if (!petInInventory) {
           newPetInventory.push({ ...p, count: 1 })
