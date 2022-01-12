@@ -125,43 +125,73 @@ function Pets() {
   const [petInventory, setPetInventory] = useState([])
   // [{ name: '', count: 0, rarity: '' }]
   const [selectedInventory, setSelectedInventory] = useState([])
+  const [count, setCount] = useState(0)
 
   const openPetEgg = pet => {
-    console.log(`opened egg: `, pet)
-    // pet = { name: '', rarity: '', probability: 0, sum: 0 }
-    // Add the pet to the inventory
-    let petInsidePetInventory = petInventory.find(i => i.name === pet.name)
-
-    if (petInsidePetInventory) {
-      console.log(`found pet inside`, petInsidePetInventory)
-      // Increase the count of the pet
-      petInsidePetInventory.count++
-      // Update the pet inside the inventory with the new count
-      const newInventory = petInventory.map(i => {
-        if (i.name === petInsidePetInventory.name) {
-          i.count += 1
+    const isMultiplePets = Array.isArray(pet)
+    console.log(`ismultiplepets: ${isMultiplePets}`)
+    if (isMultiplePets) {
+      setCount(count + pet.length)
+      let newPetInventory = [...petInventory]
+      // Loop through each one
+      pet.forEach(p => {
+        // Find the pet in the inventory
+        const petInInventory = newPetInventory.find(i => i.name === p.name)
+        console.log(`petInInventory:`, petInInventory)
+        // If it's not in the inventory, add it
+        if (!petInInventory) {
+          newPetInventory.push({ ...p, count: 1 })
+        } else {
+          // Otherwise, just increment the count
+          newPetInventory = newPetInventory.map(i =>
+            i.name === p.name ? { ...i, count: i.count + 1 } : i
+          )
         }
-        return i
       })
-      newInventory.sort(SortByRarity)
-      setPetInventory(newInventory)
+      newPetInventory.sort(SortByRarity)
+      setPetInventory(newPetInventory)
     } else {
+      setCount(count + 1)
       // Add the pet to the inventory
-      petInsidePetInventory = {
-        name: pet.name,
-        count: 1,
-        rarity: pet.rarity
+      let petInsidePetInventory = petInventory.find(i => i.name === pet.name)
+
+      if (petInsidePetInventory) {
+        console.log(`found pet inside`, petInsidePetInventory)
+        // Increase the count of the pet
+        petInsidePetInventory.count++
+        // Update the pet inside the inventory with the new count
+        const newInventory = petInventory.map(i => {
+          if (i.name === petInsidePetInventory.name) {
+            i.count += 1
+          }
+          return i
+        })
+        newInventory.sort(SortByRarity)
+        setPetInventory(newInventory)
+      } else {
+        // Add the pet to the inventory
+        petInsidePetInventory = {
+          name: pet.name,
+          count: 1,
+          rarity: pet.rarity
+        }
+        const newInventory = [...petInventory, petInsidePetInventory]
+        newInventory.sort(SortByRarity)
+        setPetInventory(newInventory)
       }
-      const newInventory = [...petInventory, petInsidePetInventory]
-      newInventory.sort(SortByRarity)
-      setPetInventory(newInventory)
     }
   }
 
   return (
     <div>
-      <h1>Pets</h1>
-      <PetEgg onOpen={openPetEgg} tier={1} />
+      <h1>Pets opened: {count}</h1>
+      <div className="m-2">
+        <h2>Boxes</h2>
+        <div className="flex gap-2 justify-center">
+          <PetEgg onOpen={openPetEgg} tier={1} amount={10} />
+          <PetEgg onOpen={openPetEgg} tier={1} amount={1} />
+        </div>
+      </div>
       <Inventory list={petInventory} />
     </div>
   )
