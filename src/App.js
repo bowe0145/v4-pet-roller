@@ -92,7 +92,7 @@ function PetName() {}
 
 function App() {
   return (
-    <div className="App">
+    <div className="flex flex-wrap m-auto justify-start prose prose-slate bg-slate-50 min-h-screen min-w-full dark:prose-invert dark:bg-slate-900">
       <Pets />
     </div>
   )

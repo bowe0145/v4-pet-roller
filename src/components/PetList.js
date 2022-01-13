@@ -70,7 +70,7 @@ export const PetList = [
   { name: 'Zamonto', probability: 0.0194, rarity: 'Epic', sum: 99.9408 },
   { name: 'Payati', probability: 0.0194, rarity: 'Epic', sum: 99.9602 },
   { name: 'Kellia', probability: 0.0194, rarity: 'Epic', sum: 99.9796 },
-  { name: 'Gaud', probability: 0.0194, rarity: 'Epic', sum: 100 },
+  { name: 'Gaud', probability: 0.0194, rarity: 'Epic', sum: 99.999 },
   { name: 'Little Dinuks', probability: 0.0, rarity: 'Legendary' },
   { name: 'Little Artuman', probability: 0.0, rarity: 'Legendary' },
   { name: 'Little Falvinia', probability: 0.0, rarity: 'Legendary' },

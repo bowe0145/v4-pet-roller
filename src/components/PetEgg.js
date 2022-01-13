@@ -11,17 +11,14 @@ export function PetEgg({ onOpen, tier, amount = 1 }) {
     // Generate a number between 0 and 100
 
     if (amount > 1) {
-      let petList = []
+      let petList = Array(amount)
+        .fill(0)
+        .map(i => +(Math.random() * 99.999).toFixed(4))
+        .map(rng => PetList.find(pet => pet.sum > rng))
 
-      for (let i = 0; i < amount; i++) {
-        const randomNumber = (Math.random() * (100 + 1.0 - 1.0)).toFixed(4)
-
-        let pet = PetList.find(pet => pet.sum > randomNumber)
-        petList.push(pet)
-      }
       onOpen(petList)
     } else {
-      const randomNumber = (Math.random() * (100 + 1.0 - 1.0)).toFixed(4)
+      const randomNumber = (Math.random() * (99.999 + 1.0 - 1.0)).toFixed(4)
       let pet = PetList.find(pet => pet.sum > randomNumber)
       onOpen(pet)
     }
@@ -30,7 +27,7 @@ export function PetEgg({ onOpen, tier, amount = 1 }) {
   return (
     <div className="flex flex-col border border-gray-500 w-auto p-2">
       <button
-        className="mx-auto px-6 py-2 border border-blue-300 bg-blue-400 hover:bg-blue-300 rounded-md m-2 transition-all duration-300 ease-in-out"
+        className="mx-auto px-6 py-2 border text-slate-900 font-semibold border-blue-300 bg-blue-400 hover:bg-blue-300 rounded-md m-2 transition-all duration-300 ease-in-out"
         onClick={randomPet}
       >
         Radiant Pet Egg {amount !== 1 ? `(x${amount})` : ''}

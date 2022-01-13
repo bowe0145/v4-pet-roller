@@ -34,8 +34,8 @@ const SortByRarity = (a, b) => {
 function InventoryBoxBody({ name, count }) {
   return (
     <>
-      <p className="text-center">{name}</p>
-      <p className="text-center">{count}</p>
+      <p className="text-center text-slate-900 dark:text-slate-200 font-semibold text-lg">{name}</p>
+      <p className="text-center text-slate-900 dark:text-slate-200">{count}</p>
     </>
   )
 }
@@ -43,11 +43,15 @@ function InventoryBoxBody({ name, count }) {
 function InventoryBox({ name, count, onClick, rarity }) {
   // Style with tailwindcss
 
-  const normalRarity = 'border w-40 h-40 bg-gray-300'
-  const fineRarity = 'border w-40 h-40 bg-green-300'
-  const rareRarity = 'border w-40 h-40 bg-blue-300'
-  const epicRarity = 'border w-40 h-40 bg-purple-300'
-  const legendaryRarity = 'border w-40 h-40 bg-orange-300'
+  const normalRarity =
+    'border-2 w-40 h-40 bg-gray-100 dark:bg-gray-100/50 border-gray-400 rounded-lg'
+  const fineRarity =
+    'border-2 w-40 h-40 bg-green-100 dark:bg-green-100/50 border-green-400 rounded-lg'
+  const rareRarity = 'border-2 w-40 h-40 bg-blue-100 dark:bg-blue-100/50 border-blue-400 rounded-lg'
+  const epicRarity =
+    'border-2 w-40 h-40 bg-purple-100 dark:bg-purple-100/50 border-purple-400 rounded-lg'
+  const legendaryRarity =
+    'border-2 w-40 h-40 bg-orange-100 dark:bg-orange-100/50 border-orange-400 rounded-lg'
 
   if (rarity === 'Normal') {
     return (
@@ -104,7 +108,7 @@ function InventoryBox({ name, count, onClick, rarity }) {
 
 function Inventory({ list = [], onClick }) {
   return (
-    <div className="flex flex-row flex-wrap mx-auto w-full gap-2 justify-center">
+    <div className="flex flex-row flex-wrap mx-auto w-full gap-4 justify-center">
       {list && list.length > 0
         ? list.map((i, idx) => (
             <InventoryBox
@@ -181,10 +185,10 @@ function Pets() {
   }
 
   return (
-    <div>
-      <h1>Pets opened: {count}</h1>
+    <div className="flex flex-col mx-auto width-full">
+      <h1 className="text-center">Pets opened: {count}</h1>
       <div className="m-2">
-        <h2>Boxes</h2>
+        <h2 className="text-center">Boxes</h2>
         <div className="flex gap-2 justify-center">
           <PetEgg onOpen={openPetEgg} tier={1} amount={10} />
           <PetEgg onOpen={openPetEgg} tier={1} amount={1} />
