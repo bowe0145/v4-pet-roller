@@ -42,53 +42,75 @@ function InventoryBoxBody({ name, count }) {
 
 function InventoryBox({ name, count, onClick, rarity }) {
   // Style with tailwindcss
+  const [isSelected, selectPet] = useState(false)
+
+  const handleClick = () => {
+    // selectPet(!isSelected)
+  }
 
   const normalRarity =
-    'border-2 w-40 h-40 bg-gray-100 dark:bg-gray-100/50 border-gray-400 rounded-lg'
+    'border-2 w-40 h-40 bg-gray-100 dark:bg-gray-100/50 border-gray-400 rounded-md'
   const fineRarity =
-    'border-2 w-40 h-40 bg-green-100 dark:bg-green-100/50 border-green-400 rounded-lg'
-  const rareRarity = 'border-2 w-40 h-40 bg-blue-100 dark:bg-blue-100/50 border-blue-400 rounded-lg'
+    'border-2 w-40 h-40 bg-green-100 dark:bg-green-100/50 border-green-400 rounded-md'
+  const rareRarity = 'border-2 w-40 h-40 bg-blue-100 dark:bg-blue-100/50 border-blue-400 rounded-md'
   const epicRarity =
-    'border-2 w-40 h-40 bg-purple-100 dark:bg-purple-100/50 border-purple-400 rounded-lg'
+    'border-2 w-40 h-40 bg-purple-100 dark:bg-purple-100/50 border-purple-400 rounded-md'
   const legendaryRarity =
-    'border-2 w-40 h-40 bg-orange-100 dark:bg-orange-100/50 border-orange-400 rounded-lg'
+    'border-2 w-40 h-40 bg-orange-100 dark:bg-orange-100/50 border-orange-400 rounded-md'
 
   if (rarity === 'Normal') {
     return (
-      <div className="flex flex-row items-center justify-between">
-        <div className={normalRarity}>
+      <div
+        className="flex flex-row items-center justify-between cursor-pointer"
+        onClick={handleClick}
+      >
+        <div className={isSelected ? `${normalRarity} outline outline-yellow-400` : normalRarity}>
           <InventoryBoxBody name={name} count={count} />
         </div>
       </div>
     )
   } else if (rarity === 'Fine') {
     return (
-      <div className="flex flex-row items-center justify-between">
-        <div className={fineRarity}>
+      <div
+        className="flex flex-row items-center justify-between cursor-pointer"
+        onClick={handleClick}
+      >
+        <div className={isSelected ? `${fineRarity} outline outline-yellow-400` : fineRarity}>
           <InventoryBoxBody name={name} count={count} />
         </div>
       </div>
     )
   } else if (rarity === 'Rare') {
     return (
-      <div className="flex flex-row items-center justify-between">
-        <div className={rareRarity}>
+      <div
+        className="flex flex-row items-center justify-between cursor-pointer"
+        onClick={handleClick}
+      >
+        <div className={isSelected ? `${rareRarity} outline outline-yellow-400` : rareRarity}>
           <InventoryBoxBody name={name} count={count} />
         </div>
       </div>
     )
   } else if (rarity === 'Epic') {
     return (
-      <div className="flex flex-row items-center justify-between">
-        <div className={epicRarity}>
+      <div
+        className="flex flex-row items-center justify-between cursor-pointer"
+        onClick={handleClick}
+      >
+        <div className={isSelected ? `${epicRarity} outline outline-yellow-400` : epicRarity}>
           <InventoryBoxBody name={name} count={count} />
         </div>
       </div>
     )
   } else if (rarity === 'Legendary') {
     return (
-      <div className="flex flex-row items-center justify-between">
-        <div className={legendaryRarity}>
+      <div
+        className="flex flex-row items-center justify-between cursor-pointer"
+        onClick={handleClick}
+      >
+        <div
+          className={isSelected ? `${legendaryRarity} outline outline-yellow-400` : legendaryRarity}
+        >
           <InventoryBoxBody name={name} count={count} />
         </div>
       </div>
@@ -108,7 +130,7 @@ function InventoryBox({ name, count, onClick, rarity }) {
 
 function Inventory({ list = [], onClick }) {
   return (
-    <div className="flex flex-row flex-wrap mx-auto w-full gap-4 justify-center">
+    <div className="flex flex-row px-2 flex-wrap mx-auto gap-2 justify-center select-none">
       {list && list.length > 0
         ? list.map((i, idx) => (
             <InventoryBox
@@ -194,7 +216,15 @@ function Pets() {
           <PetEgg onOpen={openPetEgg} tier={1} amount={1} />
         </div>
       </div>
-      <Inventory list={petInventory} />
+      <div className="flex flex-row">
+        <div className="mx-auto justify-center">
+          <h2 className="text-center">Inventory</h2>
+          <Inventory list={petInventory} />
+        </div>
+        {/* <div className="mx-auto w-5/12">
+          <h2 className="text-center">Selected</h2>
+        </div> */}
+      </div>
     </div>
   )
 }
